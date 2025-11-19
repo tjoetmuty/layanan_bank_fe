@@ -1,9 +1,11 @@
+import GetApiTanstack from "./getApiExample"
+
 function App() {
 
   return (
-    <>
-     haloo
-    </>
+   <div>
+    <GetApiTanstack/>
+   </div>
   )
 }
 
