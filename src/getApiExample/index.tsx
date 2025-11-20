@@ -1,21 +1,30 @@
-import { useQuery } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query";
+import type { Todo } from "../types";
 
 const GetApiTanstack = () => {
-  const query = useQuery({
-    queryKey: ['json'],
+  const { data, isLoading } = useQuery({
+    queryKey: ["json"],
     queryFn: async () => {
-      const res = await fetch('https://fakestoreapi.com/products')
-      return res.json()
-    }
-  })
-  console.log(query.data)
+      const res = await fetch("https://fakestoreapi.com/products");
+      return res.json();
+    },
+  });
+  console.log(data);
+
+  if (isLoading) {
+    <p>Loading...</p>;
+  }
+
   return (
     <div>
-      {query.data.map((item) => (
-        <div key={item.id}>{item.title}</div>
+      {data?.map((item: Todo) => (
+        <div key={item.id}>
+          <img src={item.image} alt="" />
+          <p>{item.category}</p>
+        </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default GetApiTanstack
+export default GetApiTanstack;
